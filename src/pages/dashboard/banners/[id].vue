@@ -109,16 +109,19 @@
     const router = useRouter();
     const currentId = router.currentRoute.value.params.id;
 
-    const filteredItems = pinia.state.banners.find(e => e.id ===  currentId )
+    const filteredItems = computed(() => {
+        return  pinia.state.banners.find(e => e.id ===  currentId );
+    });  
+
     
-    console.log(filteredItems)
+    console.log(filteredItems.value)
     
-    const title = ref(filteredItems?.title)
-    const desc = ref(filteredItems?.description)
+    const title = ref(filteredItems.value?.title)
+    const desc = ref(filteredItems.value?.description)
     const  myfile = ref(null)
-    const  preview = ref(filteredItems?.image_url)
-    const file_url = ref(filteredItems?.image_url)
-    const isEnabled = ref(filteredItems?.is_enabled)
+    const  preview = ref(filteredItems.value?.image_url)
+    const file_url = ref(filteredItems.value?.image_url)
+    const isEnabled = ref(filteredItems.value?.is_enabled)
     const isloading = ref(false)
 
     const  items =[

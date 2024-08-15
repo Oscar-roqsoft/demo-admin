@@ -67,6 +67,11 @@
             </v-col>
         </v-row>
 
+        <div  v-if="!pinia.state.banners.length" style="width: 100%; display: flex; justify-content: center; margin-top: 50px;">
+            <span style="color: #FFFFFF;font-size: large;">No data avaliable</span>
+        </div>
+
+
     </div>
 
 
@@ -117,7 +122,7 @@ const delete_banner = async() => {
 
 
 const fetch_banners = async()=>{
-    if(pinia.state.banners != null){
+    if(pinia.state.banners.length){
         return
     }else{
         await get_banner()

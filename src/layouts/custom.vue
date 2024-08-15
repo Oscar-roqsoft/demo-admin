@@ -11,6 +11,13 @@
 
 import { useStore} from "@/stores/index"
 
+const router = useRoute()
 const pinia = useStore()
+
+if(router.path.includes('/') && pinia.state.isAuthenticated){
+    navigateTo('/dashboard')
+    }else{
+        navigateTo('/')
+    }
 
 </script>

@@ -83,13 +83,16 @@
     const router = useRouter();
     const currentId = router.currentRoute.value.params.id;
 
-    const filteredItems = pinia.state.paymentMethod.find(e => e.id ===  currentId )
-    
-    
-    console.log(filteredItems)
-    const name = ref(filteredItems?.name)
+    const filteredItems = computed(() => {
+        return pinia.state.paymentMethod.find(e => e.id ===  currentId );
+    }); 
 
-    const isActive = ref(filteredItems?.active)
+    
+    
+    console.log(filteredItems.value)
+    const name = ref(filteredItems.value?.name)
+
+    const isActive = ref(filteredItems.value?.active)
     const isloading = ref(false)
 
     const  items =[

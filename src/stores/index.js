@@ -20,10 +20,10 @@ export const useStore = defineStore('demoAdminApp', () => {
     user: null,
     isAuthenticated: false,
     statistics:null,
-    banners:null,
-    countries:null,
+    banners:[],
+    countries:[],
     FAQs:[],
-    broadcasts:null,
+    broadcasts:[],
     paymentMethod:[],
     token:null,
     pin: null,
@@ -69,8 +69,22 @@ export const useStore = defineStore('demoAdminApp', () => {
   //   isAuthenticated.value = false
   // }
 
+  const clearUser =()=>{
+    state.user= null;
+    state.isAuthenticated= false;
+    state.statistics=null;
+    state.banners=null;
+    state.countries=null;
+    state.FAQs=[];
+    state.broadcasts=null;
+    state.paymentMethod=[];
+    navigateTo("/")
+
+  }
+
   return {
     state,
+    clearUser,
     setUser,
     setStatistics,
     setBannersItem,

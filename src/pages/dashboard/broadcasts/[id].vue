@@ -158,18 +158,21 @@
     const router = useRouter();
     const currentId = router.currentRoute.value.params.id;
 
-    const filteredItems = pinia.state.broadcasts.find(e => e.id ===  currentId )
-    
-    console.log(filteredItems)
+    const filteredItems = computed(() => {
+        return  pinia.state.broadcasts.find(e => e.id ===  currentId) 
+    }); 
 
-    const title = ref(filteredItems?.title)
-    const broadcast_type = ref(filteredItems?.broadcast_type)
-    const message = ref(filteredItems?.message)
-    const country_group = ref(filteredItems?.country_group)
+    
+    console.log(filteredItems.value)
+
+    const title = ref(filteredItems.value?.title)
+    const broadcast_type = ref(filteredItems.value?.broadcast_type)
+    const message = ref(filteredItems.value?.message)
+    const country_group = ref(filteredItems.value?.country_group)
     const  myfile = ref(null)
-    const  preview = ref(filteredItems?.image_url)
-    const file_url = ref(filteredItems?.image_url)
-    const isPublishOn = ref(filteredItems?.isPublishOn)
+    const  preview = ref(filteredItems.value?.image_url)
+    const file_url = ref(filteredItems.value?.image_url)
+    const isPublishOn = ref(filteredItems.value?.isPublishOn)
 
 
     const isloading = ref(false)

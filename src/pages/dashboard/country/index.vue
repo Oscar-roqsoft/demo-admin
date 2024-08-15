@@ -151,7 +151,7 @@
   }
   
   const fetch_countries = async()=>{
-    if(pinia.state.countries != null){
+    if(pinia.state.countries.length){
         return
     }else{
         isloading.value =  true
@@ -159,7 +159,7 @@
         isloading.value =  false
     }
   }
-  
+
   onMounted(() => {
     fetch_countries()
     console.log(pinia.state.countries)

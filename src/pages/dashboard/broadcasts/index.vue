@@ -10,8 +10,9 @@
 
         </v-row>
 
+
         <v-row  style="padding: 24px 0px; margin: 16px auto;" >
-            <v-col cols="12" md="6" lg="4" v-for="i in pinia.state.banners" :key="i.id">
+            <v-col cols="12" md="6" lg="4" v-for="i in pinia.state.broadcasts" :key="i.id">
                 <v-card
                     class=""
                     max-width="350"
@@ -36,7 +37,7 @@
                         </div>
                     </div>
 
-                   
+                    
 
 
                     <v-card-actions>
@@ -65,6 +66,12 @@
                 </v-card>
             </v-col>
         </v-row>
+
+        <div  v-if="!pinia.state.broadcasts.length" style="width: 100%; display: flex; justify-content: center; margin-top: 50px;">
+            <span style="color: #FFFFFF;font-size: large;">No data avaliable</span>
+        </div>
+
+      
 
     </div>
 
@@ -118,7 +125,7 @@ const delete_broadcast = async() => {
 
 
 const fetch_broadcasts = async()=>{
-    if(pinia.state.broadcasts != null){
+    if(pinia.state.broadcasts.length){
         return
     }else{
         await get_broadcast()

@@ -51,6 +51,7 @@
                             variant="solo-filled"
                             rounded="16px"
                             background="#12181F"
+                            color="black"
                             flat
                             ></v-text-field>
                         </div>

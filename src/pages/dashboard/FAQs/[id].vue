@@ -87,10 +87,13 @@
     const router = useRouter();
     const currentId = router.currentRoute.value.params.id;
 
-    const filteredItems = pinia.state.FAQs.find(e => e.id ===  currentId )
+    const filteredItems = computed(() => {
+        return pinia.state.FAQs.find(e => e.id ===  currentId );
+    });  
 
-    const question = ref(filteredItems?.question)
-    const answer = ref(filteredItems?.answer)
+
+    const question = ref(filteredItems.value?.question)
+    const answer = ref(filteredItems.value?.answer)
     
     const isloading = ref(false)
 

@@ -267,30 +267,32 @@
     const router = useRouter()
     const pinia = useStore()
     const currentId = router.currentRoute.value.params.id;
-    const filteredItems = pinia.state.countries.find(e => e.id ===  currentId )
-    
+
+    const filteredItems = computed(() => {
+        return pinia.state.countries.find(e => e.id === currentId);
+    });    
 
 
 
 
-    const country_name = ref(filteredItems?.country_name)
-    const country_code = ref(filteredItems?.country_code)
-    const currency_name = ref(filteredItems?.currency_name)
-    const currency_code = ref(filteredItems?.currency_code)
-    const phone_code = ref(filteredItems?.phone_code)
-    const timezone = ref(filteredItems?.timezone)
-    const minimum_fiat_funding = ref(filteredItems?.minimum_fiat_funding)
-    const maximum_fiat_funding = ref(filteredItems?.maximum_fiat_funding)
-    const minimum_fiat_to_crypto_swap = ref(filteredItems?.minimum_fiat_to_crypto_swap)
-    const minimum_withdrawal = ref(filteredItems?.minimum_withdrawal)
-    const withdrawal_percentage_fee = ref(filteredItems?.withdrawal_percentage_fee)
-    const supported_payment_gateways = ref(filteredItems?.supported_payment_gateways)
+    const country_name = ref(filteredItems.value?.country_name)
+    const country_code = ref(filteredItems.value?.country_code)
+    const currency_name = ref(filteredItems.value?.currency_name)
+    const currency_code = ref(filteredItems.value?.currency_code)
+    const phone_code = ref(filteredItems.value?.phone_code)
+    const timezone = ref(filteredItems.value?.timezone)
+    const minimum_fiat_funding = ref(filteredItems.value?.minimum_fiat_funding)
+    const maximum_fiat_funding = ref(filteredItems.value?.maximum_fiat_funding)
+    const minimum_fiat_to_crypto_swap = ref(filteredItems.value?.minimum_fiat_to_crypto_swap)
+    const minimum_withdrawal = ref(filteredItems.value?.minimum_withdrawal)
+    const withdrawal_percentage_fee = ref(filteredItems.value?.withdrawal_percentage_fee)
+    const supported_payment_gateways = ref(filteredItems.value?.supported_payment_gateways)
 
 
     const  myfile = ref(null)
-    const  preview = ref(filteredItems?.image_url)
-    const file_url = ref(filteredItems?.image_url)
-    const isEnabled = ref(filteredItems?.is_enabled)
+    const  preview = ref(filteredItems.value?.image_url)
+    const file_url = ref(filteredItems.value?.image_url)
+    const isEnabled = ref(filteredItems.value?.is_enabled)
     const isloading = ref(false)
 
     const  items =[
