@@ -21,7 +21,7 @@
                             class="custom-text-field"
                             v-model="search"
                             density="compact"
-                            placeholder="Search by username or email"
+                            placeholder="Search for countries"
                             prepend-inner-icon="mdi-magnify"
                             variant="solo-filled"
                             flat
@@ -151,7 +151,7 @@
   }
   
   const fetch_countries = async()=>{
-    if(pinia.state.countries.length){
+    if(!isEmpty(pinia.state.countries)){
         return
     }else{
         isloading.value =  true
@@ -164,7 +164,6 @@
     fetch_countries()
     console.log(pinia.state.countries)
   })
-  
 
 </script>
   

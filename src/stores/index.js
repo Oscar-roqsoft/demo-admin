@@ -25,9 +25,16 @@ export const useStore = defineStore('demoAdminApp', () => {
     FAQs:[],
     broadcasts:[],
     paymentMethod:[],
+    disputes:[],
+    activities:[],
+    trc_bal:null,
+    bep_bal:null,
+    trc_wallet_address:null,
+    bep_wallet_address:null,
     token:null,
     pin: null,
     isPinSet: false,
+    selected_dispute_status:'all',
   });
 
   const setUser = (payload) => {
@@ -54,6 +61,24 @@ export const useStore = defineStore('demoAdminApp', () => {
   const setPaymentMethod= (payload) => {
     state.paymentMethod = payload
   }
+  const setDispute = (payload) => {
+    state.disputes = payload
+  }
+  const setActivities = (payload) => {
+    state.activities = payload
+  }
+  const setBep_bal = (payload) => {
+    state.bep_bal = payload
+  }
+  const setTrc_bal = (payload) => {
+    state.trc_bal = payload
+  }
+  const setBep_wallet_address= (payload) => {
+    state.bep_wallet_address= payload
+  }
+  const setTrc_wallet_address= (payload) => {
+    state.trc_wallet_address= payload
+  }
 
   // const setPin = (payload) => {
   //   pin.value = payload
@@ -78,6 +103,13 @@ export const useStore = defineStore('demoAdminApp', () => {
     state.FAQs=[];
     state.broadcasts=null;
     state.paymentMethod=[];
+    state.disputes = []
+    state.activities = []
+    state.trc_bal = null
+    state.bep_bal = null
+    state.trc_wallet_address = null
+    state.bep_wallet_address = null
+
     navigateTo("/")
 
   }
@@ -91,7 +123,14 @@ export const useStore = defineStore('demoAdminApp', () => {
     setCountries,
     setFAQs,
     setBroadcasts,
-    setPaymentMethod
+    setPaymentMethod,
+    setDispute,
+    setActivities,
+    setTrc_bal,
+    setBep_bal,
+    setBep_wallet_address,
+    setTrc_wallet_address
+    
     
   }
 

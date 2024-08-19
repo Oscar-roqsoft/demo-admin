@@ -67,7 +67,7 @@
             </v-col>
         </v-row>
 
-        <div  v-if="!pinia.state.broadcasts.length" style="width: 100%; display: flex; justify-content: center; margin-top: 50px;">
+        <div  v-if="isEmpty(pinia.state.broadcasts)" style="width: 100%; display: flex; justify-content: center; margin-top: 50px;">
             <span style="color: #FFFFFF;font-size: large;">No data avaliable</span>
         </div>
 
@@ -125,7 +125,7 @@ const delete_broadcast = async() => {
 
 
 const fetch_broadcasts = async()=>{
-    if(pinia.state.broadcasts.length){
+    if(!isEmpty(pinia.state.broadcasts)){
         return
     }else{
         await get_broadcast()

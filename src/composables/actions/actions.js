@@ -4,6 +4,7 @@ import { getCountries} from "@/composables/requests/country"
 import { getFAQs } from "@/composables/requests/FAQs"
 import { getBroadcasts } from "@/composables/requests/broadcast"
 import { getPaymentMethods } from "@/composables/requests/payment"
+import { getDisputes } from "@/composables/requests/dispute"
 
 export const get_banner = async()=>{
     const pinia = useStore()
@@ -96,6 +97,26 @@ export const get_paymentMethod = async()=>{
 
         if(data.success){
             pinia.setPaymentMethod(data.data?.result)
+        }else{
+
+        }
+
+    }catch(e){
+        console.log(e)
+    }
+
+}
+
+export const get_disputes = async(disputeStatus)=>{
+    
+    const pinia = useStore()
+    const page_number = 1
+
+    try{
+        const data = await getDisputes(disputeStatus,page_number)
+
+        if(data.success){
+            pinia.setDispute(data.data?.result)
         }else{
 
         }

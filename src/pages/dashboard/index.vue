@@ -7,6 +7,7 @@
         <FAQs v-else-if="pinia.state.current_page === 'FAQs'" />
         <broadcasts v-else-if="pinia.state.current_page === 'broadcasts'" />
         <paymentMethod v-else-if="pinia.state.current_page === 'paymentMethod'" />
+        <disputes v-else-if="pinia.state.current_page === 'disputes'" />
         <!-- <trade v-else-if="pinia.state.isAuthenticated ? useCurrentNavMenu.currentNavMenu === 'trade' : navigateTo('/login')" /> -->
         <banners v-else />
     </div>
@@ -23,9 +24,10 @@
   import FAQs from "@/pages/dashboard/FAQs/index.vue";
   import broadcasts from "@/pages/dashboard/broadcasts/index.vue";
   import paymentMethod from "@/pages/dashboard/paymentMethod/index.vue";
+  import disputes from "@/pages/dashboard/disputes/index.vue";
 
 
-  defineComponent({ home, country,banners,FAQs,broadcasts,paymentMethod});
+  defineComponent({ home, country,banners,FAQs,broadcasts,paymentMethod,disputes});
 
    const pinia = useStore()
 

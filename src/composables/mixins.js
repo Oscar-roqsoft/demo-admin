@@ -18,6 +18,11 @@ export const debounce = (fn,value)=>{
 }
 
 
+export const isEmpty = (obj) => {
+    return (obj == null || Object.keys(obj).length === 0);
+  };
+
+
 export const asyncRequest = async (url, options, json = true) => {
     const pinia = useStore();
    return fetch(url, options)
@@ -25,6 +30,7 @@ export const asyncRequest = async (url, options, json = true) => {
      const statusCode = response.status;
      if(statusCode == 401){
        // if(pinia.currentNavMenu === 'home') return  pinia.state.isAuthenticated = false
+       pinia.clearUser()
        navigateTo("/");
        return;
      }
@@ -97,4 +103,33 @@ export const asyncRequest = async (url, options, json = true) => {
       return ["error", error?.message];
     }
   };
+  
+  export const  copyToClipboard =(text,symbol) =>{
+    // Create a temporary textarea element to hold the text
+    const textarea = document.createElement('textarea');
+    
+    // Set the text content of the textarea to the text you want to copy
+    textarea.value = text;
+    
+    // Make the textarea not visible to the user
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    
+    // Append the textarea to the document body
+    document.body.appendChild(textarea);
+    
+    // Select the text content of the textarea
+    textarea.select();
+    
+    // Execute the copy command
+    document.execCommand('copy');
+    
+    // Remove the textarea element from the document
+    document.body.removeChild(textarea);
+
+    push.success(`Copied ${symbol} wallet address successfully`)
+    
+    console.log('Text copied to clipboard:', text);
+  }
+
   
