@@ -91,3 +91,18 @@ export const getTRCWalletAddress = async()=>{
     }).then(res => res.json());
     return data
 }
+
+
+
+
+export const getTotalRevenue = async()=>{
+    const pinia = useStore();
+    const data = await fetch(`${baseURL}admin/revenue`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': `${pinia.state.user?.token}`
+        }
+    }).then(res => res.json());
+    return data
+}

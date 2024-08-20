@@ -7,7 +7,9 @@
 
                     <v-col cols="12" md="5"  lg="3" style="background: #12181F;padding: 24px; border-radius: 20px; min-width: 250px;">
                          <h3 style="color: #FFFFFF; font-size: 20px; font-weight: 700;">Total Revenue</h3>
-                         <h1 style="color: #FFFFFF; font-size: 26px; font-weight: 700;">{{ pinia.state.statistics?.total_web3_wallets ?  handleNumApproximation(pinia.state.statistics?.total_web3_wallets) : '' }} USD</h1>
+                         <h1 style="color: #FFFFFF; font-size: 26px; font-weight: 700;">
+                            {{ totalBalances ?  handleNumApproximation(totalBalances.fiat + totalBalances.crypto ) : '' }} USD
+                        </h1>
                          <div style=" margin-top: 10px; gap:10px;">
                             <div v-for="i in 3" style="width: 21px; height: 21px; background: #0CAF60; border-radius: 200px; margin-right: 5px; 
                             display: inline-flex; justify-content: center;align-items: center;">
@@ -178,9 +180,26 @@
 
 
 <script setup>
-   import { getStats,getActivities,getBEPBalance,getTRCBalance,getBEPWalletAddress,getTRCWalletAddress} from "@/composables/requests/stats"
+   import { getStats,getActivities,getBEPBalance,getTRCBalance,getBEPWalletAddress,getTRCWalletAddress,getTotalRevenue} from "@/composables/requests/stats"
 
    const pinia = useStore()
+
+
+    const totalBalances = computed(() => {
+
+        return pinia.state.revenue.reduce((totals, item) => {
+            const fiatTotal = Object.values(item?.fiat_monthly_revenue).reduce((sum, value) => sum + value, 0);
+            const cryptoTotal = Object.values(item?.crypto_monthly_revenue).reduce((sum, value) => sum + value, 0);
+            
+            totals.fiat += fiatTotal;
+            totals.crypto += cryptoTotal;
+
+            return totals;
+        }, { fiat: 0, crypto: 0 });
+
+    });
+
+    console.log( totalBalances.value)
 
    const get_Stats = async()=>{
 
@@ -239,6 +258,19 @@
       }
    }
 
+   const get_TotalRevenue = async()=>{
+      try{
+        const data = await getTotalRevenue()
+        if(data.success){
+            pinia.setRevenue(data.data)
+        }
+      }catch(e){
+        console.log(e)
+      }
+   }
+
+
+
    const fetch_stats = async()=>{
      if(!isEmpty(pinia.state.statistics)){
         return
@@ -265,6 +297,14 @@
      }
     }
 
+    const fetch_totalRevenue= async()=>{
+     if(!isEmpty(pinia.state.revenue)){
+        pinia.state.revenue
+     }else{
+        await  get_TotalRevenue()
+     }
+    }
+
   
    onMounted(async()=>{
        await Promise.allSettled([
@@ -272,8 +312,8 @@
        fetch_TRCBalance(),
        fetch_Bep_Balance(),
        get_Bep_wallet_address(),
-       get_TRC_wallet_address()
-  
+       get_TRC_wallet_address(),
+       fetch_totalRevenue()
       ])
    })
 

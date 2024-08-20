@@ -31,6 +31,7 @@ export const useStore = defineStore('demoAdminApp', () => {
     bep_bal:null,
     trc_wallet_address:null,
     bep_wallet_address:null,
+    revenue:null,
     token:null,
     pin: null,
     isPinSet: false,
@@ -79,6 +80,9 @@ export const useStore = defineStore('demoAdminApp', () => {
   const setTrc_wallet_address= (payload) => {
     state.trc_wallet_address= payload
   }
+  const setRevenue= (payload) => {
+    state.revenue = payload
+  }
 
   // const setPin = (payload) => {
   //   pin.value = payload
@@ -109,6 +113,7 @@ export const useStore = defineStore('demoAdminApp', () => {
     state.bep_bal = null
     state.trc_wallet_address = null
     state.bep_wallet_address = null
+    state.revenue = null
 
     navigateTo("/")
 
@@ -129,7 +134,8 @@ export const useStore = defineStore('demoAdminApp', () => {
     setTrc_bal,
     setBep_bal,
     setBep_wallet_address,
-    setTrc_wallet_address
+    setTrc_wallet_address,
+    setRevenue
     
     
   }
