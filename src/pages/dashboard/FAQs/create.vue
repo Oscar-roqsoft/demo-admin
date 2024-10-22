@@ -119,7 +119,7 @@
             const data = await addFAQs(payload)
             if(data.success){
                 push.success('Created successfully')  
-                get_banner()
+                get_FAQs()
                 navigateTo('/dashboard')
             }else{
                 push.error('Failed to create')  

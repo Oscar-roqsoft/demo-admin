@@ -13,6 +13,8 @@ export const get_banner = async()=>{
     try{
         const data = await getBanners(banner_page_number)
 
+        console.log(data)
+
         if(data.success){
             pinia.setBannersItem(data.data.result)
         }else{

@@ -19,9 +19,9 @@ import {baseURL} from "@/composables/configs"
 
 export const getBanners = async(pageNumber) =>{
     const pinia = useStore()
-    const data = await fetch(`${baseURL}app-banner/${pageNumber}`, {
+    const data = await fetch(`${baseURL}app-banner/all/${pageNumber}`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json', 'x-access-token': `${pinia.state.user?.token}` },
+        headers: { 'Content-Type': 'application/json' },
     }).then(res => res.json());
     return data
 }

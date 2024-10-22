@@ -33,7 +33,7 @@
     
                         <div style="margin: 0px 10px; color:#FFFFFF; font-size: 14px;">
                             <span style="margin-right: 5px;">Desc:</span>
-                            <span style="color: #fff8;">{{ i.description }}</span>
+                            <span style="color: #fff8;">{{ i.message }}</span>
                         </div>
                     </div>
 

@@ -3,6 +3,8 @@
         <v-card flat style="background: transparent !important;">
           <v-card-title class="d-flex align-center pe-2 flex-wrap gap-2">
             <span style="color: #FFFFFF; font-size: 16px; font-weight: 600;">Recent Activities</span>
+
+
             <v-spacer></v-spacer>
     
             <!-- <v-btn elevation="0"  class=" me-3 text-capitalize font-weight-bold border activity-btn" 
@@ -55,6 +57,7 @@
               single-line
               style="min-width: 180px;"
             ></v-text-field>
+
           </v-card-title>
       
     
@@ -85,46 +88,44 @@
                         <div v-show="item.activity.details.fiat.swap">Fiat swap</div>
                         <div v-show="item.activity.details.fiat.exchange">Fiat exchange</div>
                         <div v-show="item.activity.details.fiat.transfer">Fiat transfer</div>
-                        <!-- <div></div> -->
                     </div>
               
                 </template>
     
                 <template v-slot:item.activity ="{ item }" >
-                    <div v-if="item.activity.details.crypto" style="width: 220px;">
-                        <div v-show="item.activity.details.crypto.transfer">
-                            <span v-if="item.activity?.details?.crypto?.transfer.status?.pending">
-                                {{ item.activity.details.crypto?.transfer.status?.pending?.reason }}
+                    <div v-if="item?.activity?.details?.crypto" style="width: 220px;">
+                        <div v-show="item?.activity?.details?.crypto?.transfer">
+                            <span v-if="item?.activity?.details?.crypto?.transfer?.status?.pending">
+                                {{ item?.activity?.details?.crypto?.transfer?.status?.pending?.reason }}
                             </span>
-                                <span v-else-if="item.activity.details.crypto.transfer?.status?.fulfilled">  {{ item.activity.details.crypto.transfer?.status?.fulfilled?.reason }}</span>
+                                <span v-else-if="item?.activity?.details?.crypto?.transfer?.status?.fulfilled">  {{ item?.activity?.details?.crypto?.transfer?.status?.fulfilled?.reason }}</span>
                             <span v-else>
-                                {{ item.activity.details.crypto.transfer.status?.failed?.reason }}
+                                {{ item?.activity?.details?.crypto?.transfer?.status?.failed?.reason }}
                             </span>
                         </div>
     
-                        <div  v-show="item.activity.details.crypto.swap">
-                            <span v-if="item.activity.details.crypto.swap?.status?.pending">
-                                {{ item.activity.details.crypto.swap?.status?.pending?.reason }}
+                        <div  v-show="item?.activity?.details?.crypto.swap">
+                            <span v-if="item?.activity?.details?.crypto?.swap?.status?.pending">
+                                {{ item?.activity?.details?.crypto?.swap?.status?.pending?.reason }}
                             </span>
-                            <span v-else-if="item.activity.details.crypto.swap?.status?.fulfilled">  {{ item.activity.details.crypto.swap?.status?.fulfilled?.reason }}</span>
+                            <span v-else-if="item?.activity?.details?.crypto?.swap?.status?.fulfilled">  {{ item?.activity?.details?.crypto?.swap?.status?.fulfilled?.reason }}</span>
                             <span v-else >
-                                {{ item.activity.details.crypto.swap?.status?.failed?.reason }}
+                                {{ item?.activity?.details?.crypto?.swap?.status?.failed?.reason }}
                             </span>
                         </div>
                     
                     </div>
                     <div v-else style="width: 140px;">
-                        <div v-show="item.activity.details.fiat.swap">{{ item.activity.details?.fiat?.swap?.status}}</div>
-                        <div v-show="item.activity.details.fiat.exchange">
-                            <div v-if="item?.activity?.details?.fiat.exchange?.from_fiat_to_crypto">
-                                {{ item?.activity?.details?.fiat.exchange?.from_fiat_to_crypto?.status }}
+                        <div v-show="item?.activity.details.fiat.swap">{{ item.activity?.details?.fiat?.swap?.status}}</div>
+                        <div v-show="item?.activity?.details?.fiat?.exchange">
+                            <div v-if="item?.activity?.details?.fiat?.exchange?.from_fiat_to_crypto">
+                                {{ item?.activity?.details?.fiat?.exchange?.from_fiat_to_crypto?.status }}
                             </div>
                             <div v-else>
-                                {{ item.activity.details.fiat?.exchange?.from_crypto_to_fiat?.status }}
+                                {{ item?.activity?.details?.fiat?.exchange?.from_crypto_to_fiat?.status }}
                             </div>
                         </div>
-                        <div v-show="item.activity.details.fiat.transfer"> {{ item?.activity?.details?.fiat.transfer?.status}} </div>
-                        <!-- <div></div> -->
+                        <div v-show="item?.activity?.details?.fiat?.transfer"> {{ item?.activity?.details?.fiat?.transfer?.status}} </div>
                     </div>
               
                 </template>
@@ -168,24 +169,32 @@
 
     const get_activities = async()=>{
 
-    try{
-    const data = await getActivities()
-    if(data.success){
-        console.log(data.data)
-        pinia.setActivities(data.data)
-    }
-    }catch(e){
-    console.log(e)
-    }
+        try{
+
+            const data = await getActivities()
+
+            if(data.success){
+
+                console.log(data.data)
+                pinia.setActivities(data.data)
+                
+            }
+
+        }catch(e){
+
+        console.log(e)
+
+        }
     }
 
     const fetch_activities = async()=>{
-        if(!isEmpty(pinia.state.activities)){
-        return
+        if(pinia.state.activities.length){
+            pinia.state.activities
         }else{
-        await  get_activities()
         }
+        await  get_activities()
     }
+    
 
     onMounted(()=>{
         isloading.value = true

@@ -35,6 +35,11 @@
                             <span style="margin-right: 5px;">Desc:</span>
                             <span style="color: #fff8;">{{ i.description }}</span>
                         </div>
+
+                        <div style="margin: 0px 10px; color:#FFFFFF; font-size: 14px;">
+                            <span style="margin-right: 5px;">Is Enabled:</span>
+                            <span style="color: #fff8;">{{ i.is_enabled }}</span>
+                        </div>
                     </div>
 
                    
