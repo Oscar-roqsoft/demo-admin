@@ -1,6 +1,6 @@
 import { useStore } from "@/stores";
 
-export const baseURL = 'https://crypto-demo-api.inhouse.codes/v1/'
+export const baseURL = 'https://api.betacrypto.com/v1/'
 export const baseURL2 = 'http://localhost:3001/'
 export const cloudinaryURL = "https://api.cloudinary.com/v1_1/payhospi/upload";
 export const cloudinaryAPIKey = "PSlZAFo_ZYa2zBrnfu1KceD64rw";
