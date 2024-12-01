@@ -3,6 +3,7 @@
 
     <div>
         <home v-if="pinia.state.current_page === 'home'" />
+        <users v-else-if="pinia.state.current_page === 'users'" />
         <country v-else-if="pinia.state.current_page === 'country'" />
         <FAQs v-else-if="pinia.state.current_page === 'FAQs'" />
         <broadcasts v-else-if="pinia.state.current_page === 'broadcasts'" />
@@ -19,6 +20,7 @@
 <script setup>
    import { getStats} from "@/composables/requests/stats"
    import home from "@/pages/dashboard/home/index.vue";
+   import users from "@/pages/dashboard/users/index.vue";
    import country from "@/pages/dashboard/country/index.vue";
    import banners from "@/pages/dashboard/banners/index.vue";
   import FAQs from "@/pages/dashboard/FAQs/index.vue";
@@ -27,7 +29,7 @@
   import disputes from "@/pages/dashboard/disputes/index.vue";
 
 
-  defineComponent({ home, country,banners,FAQs,broadcasts,paymentMethod,disputes});
+  defineComponent({ home,users, country,banners,FAQs,broadcasts,paymentMethod,disputes});
 
    const pinia = useStore()
 
